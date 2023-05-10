@@ -83,6 +83,26 @@ def clear_data():
     email_entry.insert(0, "sumanbhandari6969@gamil.com")
     password_entry.delete(0,END)
 
+#Find password
+
+def find_password():
+    website = website_entry.get()
+    try:
+        with open("data.json") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showerror(title="Error", message="File not found!")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website,message=f"Email: {email}\n Password: {password}")
+
+        else:
+            messagebox.showerror(title="Error", message=f"No details for {website} exists.")
+
+
+
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -103,8 +123,8 @@ website_label = Label(text="Website:")
 website_label.grid(column=0,row=1)
 
 
-website_entry = Entry(width=35)
-website_entry.grid(column=1,row=1,columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(column=1,row=1)
 website_entry.focus()
 
 email_label = Label(text="Email/Username:")
@@ -125,6 +145,9 @@ generate_password_button.grid(column=2,row=3)
 
 add_password_button = Button(text="Add",width=36,command=save_data)
 add_password_button.grid(column=1,row=4,columnspan=2)
+
+search_button = Button(text="Search",width= 13,command=find_password)
+search_button.grid(column=2,row=1)
 
 
 
