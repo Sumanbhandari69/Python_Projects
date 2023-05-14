@@ -1,0 +1,4 @@
+to run your code daily
+host it on https://www.pythonanywhere.com/
+set utc time to run code
+in this way code run daily
